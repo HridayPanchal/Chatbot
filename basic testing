@@ -1,0 +1,128 @@
+import tkinter
+from tkinter import*
+import customtkinter as ct
+from PIL import Image,ImageTk
+import datetime
+import webbrowser
+from AppOpener import open
+import wikipedia
+
+def chatbot():
+
+    #=================================================================================================================================================
+    root=ct.CTk()
+    root.geometry('600x600')
+    root.iconbitmap('E:/Hriday/chatbot.ico')
+    root.title("ChatBot")
+
+    frame = LabelFrame(root, text="Here", width=1000, height=1000, background='black')
+    frame.pack(anchor=NW)
+
+    img_chat=Image.open('E:/Hriday/chatbot icon.png')
+    img_chat=img_chat.resize((200,100),Image.ANTIALIAS)
+    photoimg=ImageTk.PhotoImage(img_chat)
+
+    Title_label=Label(frame,bd=3,relief=RAISED,anchor=NW,width=730,height=100,compound=LEFT,image=photoimg,text='CHAT BOT',font=('arial',30,'bold'),fg='white',bg='black')
+    Title_label.pack(side=TOP)
+
+    scroll_y=Scrollbar(frame,orient=VERTICAL)
+
+    #textbox
+    text=Text(frame,width=65,height=23,bd=20,background='black',foreground='white',relief=RAISED,font=('arial',14),yscrollcommand=scroll_y.set)
+    scroll_y.pack(side=RIGHT,fill=Y)
+    text.pack()
+
+    entry = ct.CTkEntry(master=root, width=403, height=60, corner_radius=10)
+    entry.place(relx=0.0, rely=0.9)
+
+    #=================================================================================================================================================
+    def replymeth(s):
+        text.insert(END,'\n Bot: '+s)
+    #=================================================================================================================================================
+
+    def Send():
+        while True:
+            if (entry.get().lower() == ''):
+                replymeth("please enter something")
+            else:
+                user_entry = entry.get().lower()
+                text.insert(END, '\n User: ' + user_entry)
+                if ('hi' or 'hey' or 'hello' in user_entry):
+                    replymeth("Hey there, I am Aaron")
+                elif ('how are you' in user_entry):
+                    replymeth("i'm good, what about you")
+                elif ('what is your name' in user_entry):
+                    replymeth("Aaron")
+                elif ('your gender' in user_entry):
+                    replymeth("Male")
+                elif ('time' or 'date' in user_entry):
+                    replymeth(str(datetime.datetime.now()))
+                elif ('help' or 'helpline' in user_entry):
+                    replymeth("Police   100 \n Fire   101 \n Ambulance   102 \n child help   1098 \n Gas leakage   1906 \n Thane civil hospital   022-25472582 \n Railway enquiry   139")
+                elif ('chrome' or 'google' or 'google chrome' in user_entry):
+                    replymeth("opening google chrome")
+                    url = "http://www.google.com"
+                    webbrowser.open_new_tab(url)
+                elif ('youtube' in user_entry):
+                    replymeth("opening youtube")
+                    url = "http://www.youtube.com"
+                    webbrowser.open_new_tab(url)
+                elif ('maps' in user_entry):
+                    replymeth("opening maps")
+                    url = "https://www.google.com/maps"
+                    webbrowser.open_new_tab(url)
+                elif ('facebook' in user_entry):
+                    replymeth("opening facebook")
+                    #url = "http://www.facebook.com"
+                    #webbrowser.open_new_tab(url)
+                    open('facebook')
+                elif ('instagram' in user_entry):
+                    replymeth("opening instagram")
+                    #url = "http://www.instagram.com"
+                    #webbrowser.open_new_tab(url)
+                    open('instagram')
+                elif('notepad' in user_entry):
+                    replymeth('opening notepad')
+                    open('notepad')
+                elif('whatsapp' in user_entry):
+                    replymeth('opening whatsapp')
+                    open('whatsapp')
+                elif('calculator' or 'calc' in user_entry):
+                    replymeth('opening calculator')
+                    open('calculator')
+                elif('calendar' in user_entry):
+                    replymeth('opening calendar')
+                    open('calendar')
+                elif('spotify' in user_entry):
+                    replymeth('opening spotify')
+                    open('spotify')
+                elif('clock' in user_entry):
+                    replymeth('opening clock')
+                    open('clock')
+                elif('paint' in user_entry):
+                    replymeth('opening paint')
+                    open('paint')
+                elif('camera' in user_entry):
+                    replymeth('opening camera')
+                    open('camera')
+
+    def clear():
+        text.delete('1.0',END)
+        entry.set('')
+    #ininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininininin=
+    button = ct.CTkButton(master=root, text="CLEAR",command=clear, height=60, width=97, hover=True)
+    button.place(relx=0.835, rely=0.9)
+
+    button = ct.CTkButton(master=root, text="SEND",command=Send, height=60, width=97, hover=True)
+    button.place(relx=0.67, rely=0.9)
+
+    root.mainloop()
+
+chatbot()
+
+
+
+
+
+
+
